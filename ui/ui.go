@@ -5,6 +5,8 @@ import (
 
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/zan-preston/charm-ban/ui/components/board"
 	"github.com/zan-preston/charm-ban/ui/components/help"
 	"github.com/zan-preston/charm-ban/utils"
 )
@@ -12,7 +14,7 @@ import (
 type Model struct {
   keys utils.KeyMap
   help help.Model
-
+  board board.Model
 }
 
 
@@ -20,6 +22,7 @@ func NewModel() Model {
   return Model {
     keys: utils.Keys,
     help: help.NewModel(),
+    board: board.NewModel(),
   }
 }
 
@@ -65,7 +68,12 @@ func (m *Model) onWindowSizedChange (msg tea.WindowSizeMsg) {
 func (m Model) View() string {
   s := strings.Builder{}
   // Main content will be the lanes of the kanban
-  mainContent := "lanes here"
+  // mainContent := "lanes here"
+  var board = board.NewModel()
+  mainContent := lipgloss.JoinHorizontal(
+    lipgloss.Top,
+    board.View(),
+  )
   s.WriteString(mainContent)
   s.WriteString("\n")
   s.WriteString(m.help.View())

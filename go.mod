@@ -2,7 +2,10 @@ module github.com/zan-preston/charm-ban
 
 go 1.18
 
-require github.com/charmbracelet/bubbletea v0.20.0
+require (
+	github.com/charmbracelet/bubbletea v0.20.0
+	github.com/charmbracelet/lipgloss v0.4.0
+)
 
 require (
 	github.com/charmbracelet/bubbles v0.10.3
